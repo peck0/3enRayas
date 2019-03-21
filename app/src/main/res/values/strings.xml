@@ -4,10 +4,12 @@
     <string name="dos_jugadores">2 Players</string>
     <string name="facil">Easy</string>
     <string name="normal">Normal</string>
-    <string name="imposible">Insane</string>
+    <string name="dificil">Hard</string>
     <string name="casilla">Tie</string>
     <string name="circulos_ganan">Circle win!</string>
     <string name="aspas_ganan">Crosses win!</string>
     <string name="empate">Tie!</string>
+    <string name="gana_jugador1">Player 1 Win!</string>
+    <string name="bana_jugadrr2">Player 2 Win!</string>
 
 </resources>

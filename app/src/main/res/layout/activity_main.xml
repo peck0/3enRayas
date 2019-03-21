@@ -43,12 +43,13 @@
 
             <RadioButton
                 android:id="@+id/normal"
-                android:text="@string/normal"
-                style="@style/radio"/>
+                style="@style/radio"
+                android:checked="true"
+                android:text="@string/normal" />
 
             <RadioButton
                 android:id="@+id/imposible"
-                android:text="@string/imposible"
+                android:text="@string/dificil"
                 style="@style/radio"/>
 
         </RadioGroup>

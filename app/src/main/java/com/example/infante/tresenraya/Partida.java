@@ -18,24 +18,89 @@ public class Partida {
         }
     }
 
+    public int dosEnraya(int jugador_en_turno){
+        int casilla= -1;
+        int cuantas_lleva = 0;
+        //Recorrer el array COMBINACIONES
+        for (int i=0; i<COMBINACIONES.length; i++){
+            for (int pos : COMBINACIONES[i]){
+                if (casillas[pos]==jugador_en_turno){
+                    cuantas_lleva++;
+                }
+                if (casillas[pos]==0){
+                    casilla=pos;
+                }
+            }
+            if (cuantas_lleva==2 && casilla!=-1){
+                return  casilla;
+            }
+            casilla = -1;
+            cuantas_lleva = 0;
+        }
+
+        return -1;
+    }
+
     public int ia(){
         int casilla;
+        casilla=dosEnraya(2);
+        if (casilla!=-1){
+            return casilla;
+        }
+        if (dificultad>0){
+            casilla=dosEnraya(1);
+            if (casilla!=-1){
+                return casilla;
+            }
+        }
+        if (dificultad==2){
+            if (casillas[0]==0){
+                return 0;
+            }
+            if (casillas[2]==0){
+                return 2;
+            }
+            if (casillas[6]==0){
+                return 6;
+            }
+            if (casillas[8]==0){
+                return 8;
+            }
+        }
         Random casilla_azar=new Random();
         casilla=casilla_azar.nextInt(9);
         return  casilla;
     }
 
-    public void turno (){
+    public int turno (){
+        boolean emapte = true;
+        boolean ult_movimiento = true;
         for (int i=0;i<COMBINACIONES.length;i++) {
 
             for (int pos:COMBINACIONES[i]) {
-                System.out.println("Valor en posicion " + i + " " + casillas[pos]);
+               System.out.println(pos + " " + casillas[pos]);
+               if (casillas[pos]!=jugador){
+                   ult_movimiento=false;
+               }
+               if(casillas[pos]==0){
+                   emapte=false;
+               }
+            }//cierre de for anidado
+            System.out.println("*********************");
+            System.out.println(jugador);
+            if (ult_movimiento){
+                return jugador;
             }
+            ult_movimiento=true;
+        }
+        if(emapte){
+            return 3;
         }
         jugador ++;
         if(jugador>2){
             jugador=1;
         }
+        return 0;
     }
 
     public boolean comprueba_casilla (int casilla){//para comprobar si la casilla es libre
@@ -46,6 +111,7 @@ public class Partida {
         }
         return true;
     }
+
     public final int dificultad;
     public int jugador;
     private int casillas[];

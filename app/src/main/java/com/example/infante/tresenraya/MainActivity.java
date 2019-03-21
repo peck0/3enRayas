@@ -86,16 +86,42 @@ public class MainActivity extends Activity {
             return;
         }
         marca(casilla);
+        int resultado = partida.turno();
+        if (resultado>0){
+            termina(resultado);
+            return;
+        }
         casilla=partida.ia();
         while(partida.comprueba_casilla(casilla)!=true){
             casilla=partida.ia();
         }
-        partida.turno();
         marca(casilla);
-        partida.turno();
+        resultado = partida.turno();
+        if (resultado>0){
+            termina(resultado);
+        }
         /*Toast toast=Toast.makeText(this,"has pulsado la casilla " + (casilla+1), Toast.LENGTH_SHORT);
         //toast.setGravity(Gravity.CENTER,0,0);
         toast.show();*/
+    }
+
+    private void termina(int resultado){
+        String mensaje;
+        if (resultado==1){
+            mensaje="Gana jugador 1";
+        }else if(resultado==2){
+            mensaje="Gana jugado 2";
+        }else{
+            mensaje="Empate";
+        }
+        Toast toast=Toast.makeText(this,mensaje,Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER,0,0);
+        toast.show();
+        partida=null;
+
+        findViewById(R.id.unjug).setEnabled(true);
+        findViewById(R.id.dosjug).setEnabled(true);
+        findViewById(R.id.configID).setAlpha(1);
 
     }
 
@@ -107,7 +133,7 @@ public class MainActivity extends Activity {
         }else{
             imagen.setImageResource(R.drawable.aspa);
         }
-    }
+    }//fin metodo marca
 
     private int jugadores;
     private int[] CASILLAS;
