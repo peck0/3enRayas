@@ -1,6 +1,8 @@
 package com.example.infante.tresenraya;
 
 
+import android.util.Log;
+
 import java.util.Random;
 
 /**
@@ -8,6 +10,7 @@ import java.util.Random;
  */
 
 public class Partida {
+    private static final String TAG = "PARTIDA";
 
     public Partida(int dificultad){
         this.dificultad=dificultad;
@@ -19,6 +22,7 @@ public class Partida {
     }
 
     public int dosEnraya(int jugador_en_turno){
+        Log.d(TAG, "dosEnRaya");
         int casilla= -1;
         int cuantas_lleva = 0;
         //Recorrer el array COMBINACIONES
@@ -42,6 +46,7 @@ public class Partida {
     }
 
     public int ia(){
+        Log.d(TAG, "IA");
         int casilla;
         casilla=dosEnraya(2);
         if (casilla!=-1){
@@ -73,11 +78,12 @@ public class Partida {
     }
 
     public int turno (){
+        Log.d(TAG, "turno");
         boolean emapte = true;
         boolean ult_movimiento = true;
         for (int i=0;i<COMBINACIONES.length;i++) {
-
             for (int pos:COMBINACIONES[i]) {
+                //imprime las c0ombinaciones marcadas del jugador
                System.out.println(pos + " " + casillas[pos]);
                if (casillas[pos]!=jugador){
                    ult_movimiento=false;
@@ -87,7 +93,7 @@ public class Partida {
                }
             }//cierre de for anidado
             System.out.println("*********************");
-            System.out.println(jugador);
+//            System.out.println(jugador);
             if (ult_movimiento){
                 return jugador;
             }
@@ -104,6 +110,7 @@ public class Partida {
     }
 
     public boolean comprueba_casilla (int casilla){//para comprobar si la casilla es libre
+        Log.d(TAG, "comprueba casilla");
         if (casillas[casilla]!=0){
             return false;
         }else{

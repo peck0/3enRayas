@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
+    private static final String TAG = "MAIN";
     private View vista;
 
     public MainActivity() {
@@ -36,9 +38,16 @@ public class MainActivity extends Activity {
         CASILLAS[6]=R.id.c1;
         CASILLAS[7]=R.id.c2;
         CASILLAS[8]=R.id.c3;
+
+        Log.d(TAG, "onCreate");
+
+
+
     }
 
     public void aJugar(View vista){
+
+        Log.d(TAG, "aJugar");
 
         ImageView imagen;
         for(int cadaCasilla:CASILLAS){
@@ -71,6 +80,7 @@ public class MainActivity extends Activity {
     }//Fin del metodo aJugar
 
     public void toque(View vista){
+        Log.d(TAG, "toque");
         if (partida==null){
             return;
         }
@@ -106,6 +116,7 @@ public class MainActivity extends Activity {
     }
 
     private void termina(int resultado){
+        Log.d(TAG, "termina");
         String mensaje;
         if (resultado==1){
             mensaje="Gana jugador 1";
@@ -126,6 +137,7 @@ public class MainActivity extends Activity {
     }
 
     private void marca (int casilla){//metodo para marcar la casilla
+        Log.d(TAG, "marca");
         ImageView imagen;
         imagen=(ImageView)findViewById(CASILLAS[casilla]);
         if(partida.jugador==1){
